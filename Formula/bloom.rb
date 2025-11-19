@@ -1,7 +1,10 @@
 class Bloom < Formula
   desc "Generate Rosé Pine themes"
   homepage "https://github.com/rose-pine/rose-pine-bloom"
+  head "https://github.com/rose-pine/rose-pine-bloom.git", branch: "main"
   version "3.0.1"
+
+  depends_on "go" => :build
 
   on_macos do
     on_intel do
@@ -28,14 +31,20 @@ class Bloom < Formula
   end
 
   def install
-    binary_name = if OS.mac?
-      Hardware::CPU.intel? ? "rose-pine-bloom-darwin-amd64" : "rose-pine-bloom-darwin-arm64"
+    if build.head?
+      commit = Utils.safe_popen_read("git", "rev-parse", "--short", "HEAD").chomp
+      ldflags = "-s -w -X github.com/rose-pine/rose-pine-bloom/cmd.version=HEAD-#{commit}"
+      system "go", "build", *std_go_args(ldflags: ldflags, output: bin/"bloom"), "."
     else
-      Hardware::CPU.intel? ? "rose-pine-bloom-linux-amd64" : "rose-pine-bloom-linux-arm64"
-    end
+      binary_name = if OS.mac?
+        Hardware::CPU.intel? ? "rose-pine-bloom-darwin-amd64" : "rose-pine-bloom-darwin-arm64"
+      else
+        Hardware::CPU.intel? ? "rose-pine-bloom-linux-amd64" : "rose-pine-bloom-linux-arm64"
+      end
 
-    chmod(0755, binary_name)
-    bin.install(binary_name => "bloom")
+      chmod(0755, binary_name)
+      bin.install(binary_name => "bloom")
+    end
   end
 
   test do
