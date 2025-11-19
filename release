@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION="3.0.1"
+REPO="rose-pine/rose-pine-bloom"
+
+echo "Updating bloom formula to version $VERSION..."
+
+BASE_URL="https://github.com/$REPO/releases/download/v$VERSION"
+FORMULA_FILE="Formula/bloom.rb"
+
+echo "Fetching SHAs..."
+
+DARWIN_AMD64_SHA=$(curl -sL "$BASE_URL/rose-pine-bloom-darwin-amd64" | shasum -a 256 | cut -d' ' -f1)
+echo "  darwin-amd64: $DARWIN_AMD64_SHA"
+
+DARWIN_ARM64_SHA=$(curl -sL "$BASE_URL/rose-pine-bloom-darwin-arm64" | shasum -a 256 | cut -d' ' -f1)
+echo "  darwin-arm64: $DARWIN_ARM64_SHA"
+
+LINUX_AMD64_SHA=$(curl -sL "$BASE_URL/rose-pine-bloom-linux-amd64" | shasum -a 256 | cut -d' ' -f1)
+echo "  linux-amd64: $LINUX_AMD64_SHA"
+
+LINUX_ARM64_SHA=$(curl -sL "$BASE_URL/rose-pine-bloom-linux-arm64" | shasum -a 256 | cut -d' ' -f1)
+echo "  linux-arm64: $LINUX_ARM64_SHA"
+
+echo "Updating $FORMULA_FILE..."
+
+sed -i '' \
+  -e "s/version \".*\"/version \"$VERSION\"/" \
+  -e "s|releases/download/v.*/rose-pine-bloom-darwin-amd64|releases/download/v$VERSION/rose-pine-bloom-darwin-amd64|" \
+  -e "s|releases/download/v.*/rose-pine-bloom-darwin-arm64|releases/download/v$VERSION/rose-pine-bloom-darwin-arm64|" \
+  -e "s|releases/download/v.*/rose-pine-bloom-linux-amd64|releases/download/v$VERSION/rose-pine-bloom-linux-amd64|" \
+  -e "s|releases/download/v.*/rose-pine-bloom-linux-arm64|releases/download/v$VERSION/rose-pine-bloom-linux-arm64|" \
+  "$FORMULA_FILE"
+
+sed -i '' \
+  -e "/darwin-amd64/,+1s/sha256 \".*\"/sha256 \"$DARWIN_AMD64_SHA\"/" \
+  -e "/darwin-arm64/,+1s/sha256 \".*\"/sha256 \"$DARWIN_ARM64_SHA\"/" \
+  -e "/linux-amd64/,+1s/sha256 \".*\"/sha256 \"$LINUX_AMD64_SHA\"/" \
+  -e "/linux-arm64/,+1s/sha256 \".*\"/sha256 \"$LINUX_ARM64_SHA\"/" \
+  "$FORMULA_FILE"
+
+echo "Formula updated successfully!"
+
+git add "$FORMULA_FILE"
+if ! git diff --cached --quiet; then
+  git commit -m "version $VERSION"
+  echo "Committed changes for version $VERSION"
+else
+  echo "No changes detected"
+fi
