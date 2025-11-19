@@ -1,29 +1,29 @@
 class Bloom < Formula
-  desc "Bloom new Rosé Pine themes"
+  desc "Generate Rosé Pine themes"
   homepage "https://github.com/rose-pine/rose-pine-bloom"
-  version "2.2.0"
+  version "3.0.1"
 
   on_macos do
     on_intel do
-      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v2.2.0/rose-pine-bloom-darwin-amd64"
-      sha256 "78164c94d7fe268426162acb3edf42f7abdb655c69afeb44a60814aaf73f40f4"
+      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v3.0.1/rose-pine-bloom-darwin-amd64"
+      sha256 "a7c4bc0606abaf67ae7f2fd161349c51a8f5559d43dba54b7bf2081261bec959"
     end
 
     on_arm do
-      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v2.2.0/rose-pine-bloom-darwin-arm64"
-      sha256 "86191ff3a558618da7a8e33f3cd942157a319089900e2fd455bbc5d061d0a621"
+      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v3.0.1/rose-pine-bloom-darwin-arm64"
+      sha256 "2ec41950b22082d43edcd6b696d2e08a1d574645fcf7da65369dd6e01eddfd5e"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v2.2.0/rose-pine-bloom-linux-amd64"
-      sha256 "71de2f9e5effec82be41e2d7bd043e7ffcb661fe0c66c2b79a5cc457eddfb5e8"
+      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v3.0.1/rose-pine-bloom-linux-amd64"
+      sha256 "0d5c5a4bf6e3220e7eeff81bad1929ac40666e123984a05c3945f07a3bd37ec2"
     end
 
     on_arm do
-      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v2.2.0/rose-pine-bloom-linux-arm64"
-      sha256 "0b639413ef77ebafa9a73bca0e1b12240b8b8658a943835dd2f4272f2664e484"
+      url "https://github.com/rose-pine/rose-pine-bloom/releases/download/v3.0.1/rose-pine-bloom-linux-arm64"
+      sha256 "fc44ae9396e08ace6c3c94d6e4a2228e1bae64d308fbe287e72057b4d0ca5c42"
     end
   end
 
