@@ -1,28 +1,21 @@
-# Rose-pine Tap
+# Rosé Pine tap
 
-## How do I install these formulae?
+## Usage
 
-`brew install rose-pine/tap/<formula>`
+Add the tap:
 
-Or `brew tap rose-pine/tap` and then `brew install <formula>`.
+```sh
+brew tap rose-pine/tap
+```
 
-Or, in a `brew bundle` `Brewfile`:
+Install formulae:
 
-```ruby
-tap "rose-pine/tap"
-brew "<formula>"
+```sh
+brew install rose-pine/tap/<formula>
 ```
 
 ## Releasing
 
-Edit the `VERSION` in the release script and run:
-
 ```sh
-./release
+brew bump-formula-pr --no-fork --version=<new-version> rose-pine/tap/bloom
 ```
-
-This will set the formula version and update SHA's.
-
-## Documentation
-
-`brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
