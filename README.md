@@ -17,5 +17,5 @@ brew install rose-pine/tap/<formula>
 ## Releasing
 
 ```sh
-brew bump-formula-pr --no-fork --version=<new-version> rose-pine/tap/bloom
+brew bump-formula-pr --version=<new-version> rose-pine/tap/bloom
 ```
