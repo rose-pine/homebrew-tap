@@ -1,8 +1,8 @@
 class Bloom < Formula
   desc "Generate Rosé Pine themes"
   homepage "https://github.com/rose-pine/rose-pine-bloom"
-  url "https://github.com/rose-pine/rose-pine-bloom/archive/refs/tags/v3.1.0.tar.gz"
-  sha256 "3e998e424adedc155b080153e4225e0b9c429a4ac76946396f85f26c3aacaf46"
+  url "https://github.com/rose-pine/rose-pine-bloom/archive/refs/tags/v4.0.0.tar.gz"
+  sha256 "9bf63c1aa95375542c8292fa6149ff4dda1dcefdae8ab6589f764c99c0164788"
   license "MIT"
 
   depends_on "go" => :build
